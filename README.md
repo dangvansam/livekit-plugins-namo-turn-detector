@@ -6,10 +6,6 @@ Turn detection plugin for LiveKit Agents using [Namo Turn Detector](https://gith
 
 ```bash
 pip install livekit-plugins-namo-turn-detector
-
-or 
-
-pip install .
 ```
 
 ## Features
