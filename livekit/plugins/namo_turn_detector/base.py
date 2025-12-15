@@ -164,7 +164,7 @@ class NamoModelBase(ABC):
             probability = round(probability, 3)
 
             duration = time.time() - start_time
-            logger.debug(
+            logger.info(
                 f"Predict EOT Finished: {probability >= self.threshold}",
                 extra={
                     "probability": probability,
