@@ -51,6 +51,14 @@ class NamoModelBase(ABC):
         """Get the current detection threshold."""
         return self._threshold
 
+    @property
+    def provider(self) -> str:
+        return "namo"
+    
+    @property
+    def model(self) -> str:
+        return "namo"
+
     @abstractmethod
     def _inference_method(self) -> str:
         """
@@ -153,8 +161,18 @@ class NamoModelBase(ABC):
             # Parse result
             result_json = json.loads(result.decode())
             probability = result_json.get("probability", 0.0)
+            probability = round(probability, 3)
 
             duration = time.time() - start_time
+            logger.debug(
+                f"Predict EOT Finished: {probability >= self.threshold}",
+                extra={
+                    "probability": probability,
+                    "threshold": self.threshold,
+                    "sentence": sentence,
+                    "duration": duration
+                }
+            )
             return probability
 
         except asyncio.TimeoutError:

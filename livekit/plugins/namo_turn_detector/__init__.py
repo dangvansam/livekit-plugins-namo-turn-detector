@@ -17,7 +17,14 @@ from livekit.agents import Plugin
 from .log import logger
 from .version import __version__
 
-__all__ = ["multilingual", "language_specific", "__version__"]
+__all__ = [
+    "multilingual",
+    "language_specific",
+    "vi_model",
+    "en_model",
+    "zh_model",
+    "__version__",
+]
 
 
 class NamoTurnDetectorPlugin(Plugin):
@@ -47,4 +54,16 @@ def __getattr__(name: str):
         from . import language_specific
 
         return language_specific
+    elif name == "vi_model":
+        from . import vi_model
+
+        return vi_model
+    elif name == "en_model":
+        from . import en_model
+
+        return en_model
+    elif name == "zh_model":
+        from . import zh_model
+
+        return zh_model
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

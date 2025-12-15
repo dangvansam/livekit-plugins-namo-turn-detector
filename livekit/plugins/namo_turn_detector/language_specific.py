@@ -217,6 +217,10 @@ class LanguageSpecificModel(NamoModelBase):
         """Get the configured language code."""
         return self._language
 
+    @property
+    def model(self) -> str:
+        return f"namo-{self._language}"
+
     def _inference_method(self) -> str:
         """Get the inference method for this language."""
         return _get_language_runner_method(self._language)
